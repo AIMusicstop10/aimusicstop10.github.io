@@ -36,9 +36,43 @@ Click Here To Learn More
 Now Playing
 </h2>
 
-<audio controls style="width:100%;">
-  <source src="aimcroooobackrasiooo-1.mp3" type="audio/mpeg">
-  Your browser does not support audio.
-</audio>
+<audio id="player" controls style="width:100%;"></audio>
+
+<br><br>
+
+<button onclick="prevSong()">⏮ Previous</button>
+<button onclick="nextSong()">⏭ Next</button>
+
+<script>
+const songs = [
+"aimcroooobackrasiooo-1.mp3",
+"whoru.mp3",
+"samebreayh.mp3",
+"prison burden1.mp3",
+"Sassy Sophie (1).mp3"
+];
+
+let currentSong = 0;
+
+const player = document.getElementById("player");
+
+function loadSong(index){
+  player.src = songs[index];
+}
+
+function nextSong(){
+  currentSong = (currentSong + 1) % songs.length;
+  loadSong(currentSong);
+  player.play();
+}
+
+function prevSong(){
+  currentSong = (currentSong - 1 + songs.length) % songs.length;
+  loadSong(currentSong);
+  player.play();
+}
+
+loadSong(0);
+</script>
 </body>
 </html>
