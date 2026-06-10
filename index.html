@@ -64,9 +64,11 @@ let currentSong = 0;
 const player = document.getElementById("player");
 
 function loadSong(index){
-  player.src = songs[index];
-}
+    player.src = songs[index];
 
+    document.getElementById("songTitle").innerText =
+    songs[index].replace(".mp3","");
+}
 function nextSong(){
   currentSong = (currentSong + 1) % songs.length;
   loadSong(currentSong);
