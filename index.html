@@ -77,7 +77,8 @@ function prevSong(){
   player.play();
 }
 
-loadSong(0);
+player.addEventListener("ended", nextSong);
+  loadSong(0);
 </script>
 </body>
 </html>
