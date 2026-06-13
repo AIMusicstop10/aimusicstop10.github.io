@@ -99,8 +99,8 @@ function playSong(index){
 function loadSong(index){
     player.src = songs[index];
 
-    document.getElementById("songTitle").innerText =
-    songs[index].replace(".mp3","");
+document.getElementById("songTitle").innerText =
+songTitles[index];
 }
 function nextSong(){
   currentSong = (currentSong + 1) % songs.length;
