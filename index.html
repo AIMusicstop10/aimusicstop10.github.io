@@ -78,7 +78,11 @@ const songs = [
 let currentSong = 0;
 
 const player = document.getElementById("player");
-
+function playSong(index){
+  currentSong = index;
+  loadSong(index);
+  player.play();
+}
 function loadSong(index){
     player.src = songs[index];
 
