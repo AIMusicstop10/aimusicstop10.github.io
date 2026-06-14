@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AI Music Jukebox</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <title>AI Music Jukebox</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
-
 <body>
-  <div class="jukebox">
-    <div class="jukebox-frame">
-      <div class="jukebox-top-glow"></div>
+    <div class="jukebox">
+        <div class="jukebox-frame">
+            <div class="jukebox-top-glow"></div>
 
-      <div class="jukebox-window">
-        <div class="now-playing">NOW PLAYING: —</div>
+            <div class="jukebox-window">
+                <div class="now-playing">NOW PLAYING: --</div>
 
-        <div class="track-list">
-          <div class="track-card" data-track="song1.mp3">Track 01 — Neon Nights</div>
-          <div class="track-card" data-track="song2.mp3">Track 02 — Cyber Groove</div>
-          <div class="track-card" data-track="song3.mp3">Track 03 — Retro Pulse</div>
+                <div class="track-list">
+                    <div class="track-card" data-track="song1.mp3">Track 01 - Neon Nights</div>
+                    <div class="track-card" data-track="song2.mp3">Track 02 - Cyber Groove</div>
+                    <div class="track-card" data-track="song3.mp3">Track 03 - Retro Pulse</div>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="nav-btn" id="prev">◀</button>
+                    <button class="nav-btn" id="next">▶</button>
+                </div>
+            </div>
+
+            <button class="play-btn" id="play">PLAY</button>
         </div>
 
-        <div class="nav-buttons">
-          <button class="nav-btn" id="prev">◀</button>
-          <button class="nav-btn" id="next">▶</button>
-        </div>
-      </div>
-
-      <button class="play-btn" id="play">PLAY</button>
+        <audio id="player"></audio>
     </div>
-
-    <audio id="player"></audio>
-  </div>
 </body>
 </html>
