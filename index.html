@@ -8,8 +8,8 @@
         body {
             margin: 0;
             padding: 20px 0;
-            background: radial-gradient(circle, #221122 0%, #050505 100%);
-            font-family: 'Impact', 'Arial Black', sans-serif;
+            background-color: #030008;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -17,71 +17,301 @@
             min-height: 100vh;
         }
 
-        /* The Classic 50s Arch-Top Jukebox Body */
-        .classic-jukebox {
-            width: 90%;
-            max-width: 480px;
-            background: linear-gradient(to bottom, #5a2a18, #2b1108); /* Rich wood-grain look */
-            border: 6px solid #d4af37; /* Gold trim outline */
-            border-top-left-radius: 240px; /* Creates the iconic rounded arch top */
-            border-top-right-radius: 240px;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-            padding: 40px 25px 30px 25px;
-            box-shadow: 0 0 40px rgba(255, 0, 128, 0.4), inset 0 0 20px #000;
+        /* Cyber Jukebox Console Main Body */
+        .cyber-jukebox {
+            width: 95%;
+            max-width: 550px;
+            background: #0d0614;
+            border: 4px solid #4a154b;
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 0 35px rgba(147, 51, 234, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.9);
             position: relative;
+            box-sizing: border-box;
         }
 
-        /* Glowing Neon Tubes along the Arch */
-        .neon-arch {
+        /* Neon Side Columns */
+        .cyber-jukebox::before, .cyber-jukebox::after {
+            content: '';
             position: absolute;
-            top: 15px;
-            left: 15px;
-            right: 15px;
-            bottom: 15px;
-            border-top-left-radius: 220px;
-            border-top-right-radius: 220px;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            border: 8px solid #ff0055;
-            box-shadow: 0 0 20px #ff0055, inset 0 0 15px #ff0055;
-            pointer-events: none;
-            z-index: 1;
+            top: 40px;
+            width: 12px;
+            height: calc(100% - 80px);
+            border-radius: 6px;
+            box-shadow: 0 0 15px currentColor;
+        }
+        /* Left Column Blue */
+        .cyber-jukebox::before {
+            left: -8px;
+            background: #00d4ff;
+            color: #00d4ff;
+        }
+        /* Right Column Purple */
+        .cyber-jukebox::after {
+            right: -8px;
+            background: #bd00ff;
+            color: #bd00ff;
         }
 
-        .neon-inner-arch {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            right: 30px;
-            bottom: 30px;
-            border-top-left-radius: 200px;
-            border-top-right-radius: 200px;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            border: 6px solid #00f0ff;
-            box-shadow: 0 0 20px #00f0ff, inset 0 0 15px #00f0ff;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* Title Header Area */
-        .title-plate {
-            position: relative;
-            z-index: 2;
+        /* Main Glowing Title Header */
+        .header-panel {
             text-align: center;
-            margin-top: 40px;
             margin-bottom: 25px;
-            text-transform: uppercase;
-            font-size: 32px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px #fff, 0 0 20px #ff0055, 0 0 30px #ff0055;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid #bd00ff;
+            box-shadow: 0 0 15px rgba(189, 0, 255, 0.4);
         }
 
-        .title-plate span {
-            color: #00f0ff;
-            text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+        .header-panel h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
         }
+
+        .header-panel span {
+            color: #00d4ff;
+            text-shadow: 0 0 10px #00d4ff;
+        }
+
+        /* Vinyl Record Centerpiece Area */
+        .record-zone {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .vinyl-record {
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, #000 30%, #111 31%, #222 40%, #050505 50%, #1a1a1a 70%, #000 100%);
+            border-radius: 50%;
+            border: 2px solid #333;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 0 10px rgba(189, 0, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Center Gold Label */
+        .record-label {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #ffd700, #b8860b);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000;
+            font-size: 9px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+
+        /* Sleek Status Display Screen */
+        .status-display {
+            background: #040206;
+            border: 2px solid #00d4ff;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            box-shadow: inset 0 0 15px rgba(0, 212, 255, 0.3), 0 0 10px rgba(0, 212, 255, 0.1);
+            margin-bottom: 25px;
+        }
+
+        .status-label {
+            font-size: 11px;
+            color: #00d4ff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .status-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px #ffffff;
+        }
+
+        /* Neon Track Selector Grid Layout */
+        .tracks-container {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #4a154b;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.6);
+        }
+
+        .grid-title {
+            text-align: center;
+            font-size: 13px;
+            color: #aaa;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        /* High-tech Glowing Purple Grid Buttons */
+        .cyber-btn {
+            background: #140b24;
+            border: 2px solid #bd00ff;
+            color: #bd00ff;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(189, 0, 255, 0.3);
+            transition: all 0.15s ease;
+        }
+
+        .cyber-btn:hover {
+            background: rgba(189, 0, 255, 0.1);
+            box-shadow: 0 0 12px rgba(189, 0, 255, 0.6);
+        }
+
+        .cyber-btn:active, .cyber-btn.active {
+            background: #bd00ff;
+            color: #000000;
+            box-shadow: 0 0 15px #bd00ff;
+            transform: scale(0.95);
+        }
+
+        /* Action Panel Buttons (Reset & Play) */
+        .action-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .action-btn {
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 14px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-clear {
+            background: transparent;
+            border: 2px solid #ff0055;
+            color: #ff0055;
+            box-shadow: 0 0 8px rgba(255, 0, 85, 0.2);
+        }
+
+        .btn-clear:active {
+            background: #ff0055;
+            color: #000;
+            box-shadow: 0 0 15px #ff0055;
+        }
+
+        .btn-activate {
+            background: transparent;
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.2);
+        }
+
+        .btn-activate:active {
+            background: #00d4ff;
+            color: #000;
+            box-shadow: 0 0 15px #00d4ff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cyber-jukebox">
+        <div class="header-panel">
+            <h1>AIMusic's <span>Top 10</span></h1>
+        </div>
+        
+        <div class="record-zone">
+            <div class="vinyl-record">
+                <div class="record-label">TOP 10</div>
+            </div>
+        </div>
+
+        <div class="status-display">
+            <div class="status-label">System Status</div>
+            <div id="display-text">READY TO LOAD TRAX</div>
+        </div>
+
+        <div class="tracks-container">
+            <div class="grid-title">Select Track Number</div>
+            <div class="button-grid">
+                <button class="cyber-btn" onclick="selectTrack('1', this)">1</button>
+                <button class="cyber-btn" onclick="selectTrack('2', this)">2</button>
+                <button class="cyber-btn" onclick="selectTrack('3', this)">3</button>
+                <button class="cyber-btn" onclick="selectTrack('4', this)">4</button>
+                <button class="cyber-btn" onclick="selectTrack('5', this)">5</button>
+                <button class="cyber-btn" onclick="selectTrack('6', this)">6</button>
+                <button class="cyber-btn" onclick="selectTrack('7', this)">7</button>
+                <button class="cyber-btn" onclick="selectTrack('8', this)">8</button>
+                <button class="cyber-btn" onclick="selectTrack('9', this)">9</button>
+                <button class="cyber-btn" onclick="selectTrack('10', this)">10</button>
+            </div>
+
+            <div class="action-panel">
+                <button class="action-btn btn-clear" onclick="clearSystem()">Clear</button>
+                <button class="action-btn btn-activate" onclick="fireTrack()">Play</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedTrackNum = "";
+
+        function selectTrack(num, buttonElement) {
+            // Remove active glow from all buttons
+            let buttons = document.querySelectorAll('.cyber-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Activate selected button glow
+            buttonElement.classList.add('active');
+            selectedTrackNum = num;
+            document.getElementById('display-text').innerText = "TRACK " + num + " ARMED";
+        }
+
+        function clearSystem() {
+            selectedTrackNum = "";
+            let buttons = document.querySelectorAll('.cyber-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            document.getElementById('display-text').innerText = "READY TO LOAD TRAX";
+        }
+
+        function fireTrack() {
+            if(selectedTrackNum === "") {
+                document.getElementById('display-text').innerText = "SELECT TRACK FIRST";
+            } else {
+                document.getElementById('display-text').innerText = "NOW STREAMING: TRACK " + selectedTrackNum;
+            }
+        }
+    </script>
+
+</body>
+</html>
 
         /* 1950s Style Song Display Screen */
         .song-display {
