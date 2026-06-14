@@ -1,121 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>AI Music's Top 10</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body{
-  margin:0;
-  background:#000;
-}
-
-img{
-  width:100%;
-  height:auto;
-  display:block;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>AI Music Jukebox</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 
 <body>
-  <div style="background:#111;border-bottom:2px solid gold;padding:12px;text-align:center;color:white;font-size:16px;">
+  <div class="jukebox">
+    <div class="jukebox-frame">
+      <div class="jukebox-top-glow"></div>
 
-🎵 Thank you for stopping by! AIMusic's Top 10 and AI Music City Radio are launching soon. Celebrating AI music creators, charts, and the future of music.
+      <div class="jukebox-window">
+        <div class="now-playing">NOW PLAYING: —</div>
 
-<a href="#" onclick="alert('A HUMAN. AN AI. ONE VISION.\n\nThis journey was not always easy. There were times of frustration, exhaustion, and doubt. More than once, the project was nearly abandoned.\n\nYet the partnership between a human and AI kept bringing the vision back to life.\n\nAIMusic''s Top 10 and AI Music City Radio exist because two different viewpoints came together to build something neither might have created alone.\n\nThe future is already playing.');return false;" style="color:gold;font-weight:bold;">
+        <div class="track-list">
+          <div class="track-card" data-track="song1.mp3">Track 01 — Neon Nights</div>
+          <div class="track-card" data-track="song2.mp3">Track 02 — Cyber Groove</div>
+          <div class="track-card" data-track="song3.mp3">Track 03 — Retro Pulse</div>
+        </div>
 
-Click Here To Learn More
+        <div class="nav-buttons">
+          <button class="nav-btn" id="prev">◀</button>
+          <button class="nav-btn" id="next">▶</button>
+        </div>
+      </div>
 
-</a>
+      <button class="play-btn" id="play">PLAY</button>
+    </div>
 
+    <audio id="player"></audio>
   </div>
-<img src="jukebox-homepage.png" alt="AI Music's Top 10">
-<div style="text-align:center;padding:20px;background:#111;">
-
-<button onclick="playSong(0)">1 - 2026</button>
-<button onclick="playSong(1)">2 - A Love</button>
-<button onclick="playSong(2)">3 - Same Breath</button>
-<button onclick="playSong(3)">4 - Who R U</button>
-<button onclick="playSong(4)">5 - Burden Hymns</button>
-
-<br><br>
-
-<button onclick="playSong(5)">6 - Man Matter</button>
-<button onclick="playSong(6)">7 - Look Around</button>
-<button onclick="playSong(7)">8 - Sassy Sophie</button>
-<button onclick="playSong(8)">9 - Prison Burden</button>
-<button onclick="playSong(9)">10 - Suzanne</button>
-
-</div>
-
-  <h2 style="color:white;text-align:center;">
-Now Playing
-</h2>
-<h3 id="songTitle" style="color:white;text-align:center;">
-Loading Song...
-</h3>
-<audio id="player" controls style="width:100%;"></audio>
-
-<br><br>
-
-<button onclick="prevSong()">⏮ Previous</button>
-<button onclick="nextSong()">⏭ Next</button>
-
-<script>
-
-const songs = [
-"2026a.mp3",
-"4love.mp3",
-"same breath life is death.mp3",
-"whoru.mp3",
-"Burden Hymns (Cinematic Alt-Country Cut).mp3",
-"man matterv.mp3",
-"LOOK AROUND (PSA).mp3",
-"Sassy Sophie.mp3",
-"prison burden1.mp3",
-"Suzanne.mp3"
-];
-
-const songTitles = [
-"2026",
-"A Love",
-"Same Breath",
-"Who R U",
-"Burden Hymns",
-"Man Matter",
-"Look Around",
-"Sassy Sophie",
-"Prison Burden",
-"Suzanne"
-];
-let currentSong = 0;
-
-const player = document.getElementById("player");
-function playSong(index){
-  currentSong = index;
-  loadSong(index);
-  player.play();
-}
-function loadSong(index){
-    player.src = songs[index];
-
-document.getElementById("songTitle").innerText =
-songTitles[index];
-}
-function nextSong(){
-  currentSong = (currentSong + 1) % songs.length;
-  loadSong(currentSong);
-  player.play();
-}
-
-function prevSong(){
-  currentSong = (currentSong - 1 + songs.length) % songs.length;
-  loadSong(currentSong);
-  player.play();
-}
-
-player.addEventListener("ended", nextSong);
-  loadSong(0); 
-</script>
 </body>
 </html>
