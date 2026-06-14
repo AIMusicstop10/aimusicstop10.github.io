@@ -2,34 +2,219 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AI Music Jukebox</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMusic's Top 10</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px 0;
+            background: radial-gradient(circle, #221122 0%, #050505 100%);
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* The Classic 50s Arch-Top Jukebox Body */
+        .classic-jukebox {
+            width: 90%;
+            max-width: 480px;
+            background: linear-gradient(to bottom, #5a2a18, #2b1108); /* Rich wood-grain look */
+            border: 6px solid #d4af37; /* Gold trim outline */
+            border-top-left-radius: 240px; /* Creates the iconic rounded arch top */
+            border-top-right-radius: 240px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            padding: 40px 25px 30px 25px;
+            box-shadow: 0 0 40px rgba(255, 0, 128, 0.4), inset 0 0 20px #000;
+            position: relative;
+        }
+
+        /* Glowing Neon Tubes along the Arch */
+        .neon-arch {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-top-left-radius: 220px;
+            border-top-right-radius: 220px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border: 8px solid #ff0055;
+            box-shadow: 0 0 20px #ff0055, inset 0 0 15px #ff0055;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .neon-inner-arch {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            right: 30px;
+            bottom: 30px;
+            border-top-left-radius: 200px;
+            border-top-right-radius: 200px;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            border: 6px solid #00f0ff;
+            box-shadow: 0 0 20px #00f0ff, inset 0 0 15px #00f0ff;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Title Header Area */
+        .title-plate {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            font-size: 32px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #fff, 0 0 20px #ff0055, 0 0 30px #ff0055;
+        }
+
+        .title-plate span {
+            color: #00f0ff;
+            text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+        }
+
+        /* 1950s Style Song Display Screen */
+        .song-display {
+            position: relative;
+            z-index: 2;
+            background: #111811;
+            border: 4px solid #d4af37;
+            border-radius: 4px;
+            padding: 15px;
+            height: 100px;
+            margin: 0 auto 30px auto;
+            width: 80%;
+            box-shadow: inset 0 0 15px #00ff00;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New', monospace;
+            color: #33ff33;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        /* Authentic Selection Button Bank */
+        .keyboard-panel {
+            position: relative;
+            z-index: 2;
+            background: #222;
+            border: 3px solid #666;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: inset 0 5px 15px rgba(0,0,0,0.8);
+        }
+
+        .panel-label {
+            text-align: center;
+            font-size: 14px;
+            color: #aaa;
+            font-family: Arial, sans-serif;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        /* Classic Mechanical Push-Button look */
+        .retro-btn {
+            background: linear-gradient(to bottom, #ffffff 0%, #e0e0e0 100%);
+            border: 2px solid #999;
+            border-bottom: 5px solid #666;
+            color: #111;
+            font-family: 'Arial Black', sans-serif;
+            font-size: 18px;
+            padding: 10px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 5px rgba(0,0,0,0.5);
+            transition: all 0.1s ease;
+        }
+
+        /* Pushes down mechanically when clicked */
+        .retro-btn:active, .retro-btn.selected {
+            border-bottom: 2px solid #666;
+            transform: translateY(3px);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            background: #ffec85;
+        }
+
+        /* Huge Action Buttons at Bottom */
+        .action-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .action-btn {
+            font-family: 'Impact', sans-serif;
+            font-size: 20px;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            border: 2px solid rgba(255,255,255,0.4);
+            transition: all 0.1s ease;
+        }
+
+        .btn-reset {
+            background: linear-gradient(to bottom, #ff2222, #aa0000);
+            color: white;
+            border-bottom: 5px solid #660000;
+            box-shadow: 0 0 10px rgba(255,34,34,0.4);
+        }
+
+        .btn-play {
+            background: linear-gradient(to bottom, #22ff22, #00aa00);
+            color: black;
+            border-bottom: 5px solid #006600;
+            box-shadow: 0 0 10px rgba(34,255,34,0.4);
+        }
+
+        .action-btn:active {
+            transform: translateY(3px);
+            border-bottom-width: 2px;
+        }
+    </style>
 </head>
 <body>
-    <div class="jukebox">
-        <div class="jukebox-frame">
-            <div class="jukebox-top-glow"></div>
 
-            <div class="jukebox-window">
-                <div class="now-playing">NOW PLAYING: --</div>
+    <div class="classic-jukebox">
+        <div class="neon-arch"></div>
+        <div class="neon-inner-arch"></div>
 
-                <div class="track-list">
-                    <div class="track-card" data-track="song1.mp3">Track 01 - Neon Nights</div>
-                    <div class="track-card" data-track="song2.mp3">Track 02 - Cyber Groove</div>
-                    <div class="track-card" data-track="song3.mp3">Track 03 - Retro Pulse</div>
-                </div>
-
-                <div class="nav-buttons">
-                    <button class="nav-btn" id="prev">◀</button>
-                    <button class="nav-btn" id="next">▶</button>
-                </div>
-            </div>
-
-            <button class="play-btn" id="play">PLAY</button>
+        <div class="title-plate">
+            AIMusic's <span>Top 10</span>
+        </div>
+        
+        <div class="song-display">
+            <div style="font-size: 11px; color: #88ff88; margin-bottom: 5px;">SELECT SELECTION NUMBER</div>
+            <div id="display-text">READY TO ROCK</div>
         </div>
 
-        <audio id="player"></audio>
-    </div>
-</body>
-</html>
+        <div class="keyboard-panel">
+            <div class="panel-label">Track Selector</div>
+            <div class="button-grid">
+                <button class="retro-btn" onclick="pressButton('1')">1</button>
+                <button class="retro-btn" onclick="pressButton('2')">2</button>
+                <button class="retro-btn" onclick="pressButton('3')">3</button>
+                
