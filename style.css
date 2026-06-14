@@ -102,3 +102,26 @@ body {
   background: #ff33ff;
   box-shadow: 0 0 30px #ff00ffaa;
 }
+.nav-btn:hover {
+  background: #00eaff;
+  color: #000;
+}
+
+.play-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 15px;
+  font-size: 20px;
+  background: #ff00ff;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 20px #ff00ff88;
+  transition: 0.2s;
+}
+
+.play-btn:hover {
+  background: #ff33ff;
+  box-shadow: 0 0 30px #ff00ffaa;
+}
