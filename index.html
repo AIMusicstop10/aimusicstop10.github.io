@@ -1,50 +1,121 @@
-<button class="track-hotspot" onclick="playSong('Sassy Sophie.mp3', this)" title="Play Track 3"></button>
-                <button class="track-hotspot" onclick="playSong('Rights Go Quiet.mp3', this)" title="Play Track 4"></button>
-                <button class="track-hotspot" onclick="playSong('Suzanne.mp3', this)" title="Play Track 5"></button>
-                
-                <button class="track-hotspot" onclick="playSong('Private Chef .mp3', this)" title="Play Track 6"></button>
-                <button class="track-hotspot" onclick="playSong('man matterv.mp3', this)" title="Play Track 7"></button>
-                <button class="track-hotspot" onclick="playSong('love......mp3', this)" title="Play Track 8"></button>
-                <button class="track-hotspot" onclick="playSong('same breath life is death..mp3', this)" title="Play Track 9"></button>
-                <button class="track-hotspot" onclick="playSong('shanes fame.mp3', this)" title="Play Track 10"></button>
-            </div>
-        </div>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIM Music's Top 10</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
 
-    <audio id="global-audio-player"></audio>
+    /* Target Header: Solid Blue */
+    h1.brand-header {
+      color: #007bff; /* Solid Blue */
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+    }
 
-    <script>
-        const audioPlayer = document.getElementById('global-audio-player');
-        let currentButton = null;
+    .track-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
 
-        function playSong(audioFile, element) {
-            // Pause if clicking an already active song
-            if (audioPlayer.src.includes(encodeURIComponent(audioFile)) && !audioPlayer.paused) {
-                audioPlayer.pause();
-                element.classList.remove('playing');
-                return;
-            }
+    /* Track Buttons styling */
+    .track-hotspot {
+      background-color: #222;
+      color: #eee;
+      border: 2px solid #444;
+      padding: 15px 20px;
+      width: 100%;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+    }
 
-            // Reset glow state on previous track
-            if (currentButton) {
-                currentButton.classList.remove('playing');
-            }
+    .track-hotspot:hover {
+      background-color: #333;
+      border-color: #007bff;
+    }
 
-            // Assign audio source and play
-            audioPlayer.src = audioFile;
-            audioPlayer.play().catch(error => console.log("Playback error or file missing:", error));
-            
-            currentButton = element;
-            currentButton.classList.add('playing');
+    /* Active playing state: matching blue accent */
+    .track-hotspot.playing {
+      background-color: #007bff;
+      color: #fff;
+      border-color: #00bfff;
+      box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- The requested brand heading in solid blue -->
+  <h1 class="brand-header">AIM Music's Top 10</h1>
+
+  <div class="track-container">
+    <button class="track-hotspot" onclick="playSong('Sassy Sophie.mp3', this)" title="Play Track 3">Track 3: Sassy Sophie</button>
+    <button class="track-hotspot" onclick="playSong('Rights Go Quiet.mp3', this)" title="Play Track 4">Track 4: Rights Go Quiet</button>
+    <button class="track-hotspot" onclick="playSong('Suzanne.mp3', this)" title="Play Track 5">Track 5: Suzanne</button>
+    <button class="track-hotspot" onclick="playSong('Private Chef .mp3', this)" title="Play Track 6">Track 6: Private Chef</button>
+    <button class="track-hotspot" onclick="playSong('man matterv.mp3', this)" title="Play Track 7">Track 7: Man Matterv</button>
+    <button class="track-hotspot" onclick="playSong('love......mp3', this)" title="Play Track 8">Track 8: Love......</button>
+    <button class="track-hotspot" onclick="playSong('same breath life is death..mp3', this)" title="Play Track 9">Track 9: Same Breath Life Is Death</button>
+    <button class="track-hotspot" onclick="playSong('shanes fame.mp3', this)" title="Play Track 10">Track 10: Shanes Fame</button>
+  </div>
+
+  <!-- Hidden Audio Player -->
+  <audio id="global-audio-player"></audio>
+
+  <script>
+    const audioPlayer = document.getElementById('global-audio-player');
+    let currentButton = null;
+
+    function playSong(audioFile, element) {
+      // 1. Pause if clicking an already playing track
+      if (audioPlayer.src.includes(encodeURIComponent(audioFile)) && !audioPlayer.paused) {
+        audioPlayer.pause();
+        element.classList.remove('playing');
+        return;
+      }
+
+      // 2. Reset visual state on previous track
+      if (currentButton) {
+        currentButton.classList.remove('playing');
+      }
+
+      // 3. Set up and play the new audio file
+      audioPlayer.src = audioFile;
+      audioPlayer.play()
+        .then(() => {
+          // 4. Update track variables and toggle visual styling
+          currentButton = element;
+          currentButton.classList.add('playing');
+        })
+        .catch(error => {
+          console.error("Audio playback failed:", error);
+        });
+
+      // 5. Revert button layout back to default when track naturally finishes
+      audioPlayer.onended = function() {
+        if (currentButton) {
+          currentButton.classList.remove('playing');
+          currentButton = null;
         }
-
-        // Clean up glow style when audio finishes automatically
-        audioPlayer.onended = function() {
-            if (currentButton) {
-                currentButton.classList.remove('playing');
-            }
-        };
-    </script>
+      };
+    }
+  </script>
 
 </body>
 </html>
