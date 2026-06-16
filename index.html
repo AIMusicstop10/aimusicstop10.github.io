@@ -1,225 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Music Top 10</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Music's Top 10</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
+        body {
+            background-color: #0d0214;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
 
-body{
-    background:#0d1117;
-    color:white;
-    padding:20px;
-}
+        /* Container that maintains the aspect ratio of the main dashboard background */
+        .dashboard-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px; 
+            aspect-ratio: 10 / 16; 
+            /* FIXED: Points to your uploaded background image */
+            background-image: url('1781621044747.png');
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(186, 73, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.container{
-    max-width:900px;
-    margin:auto;
-}
+        /* Dark overlay to slightly dim the background so the front player pops out */
+        .dashboard-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 2, 20, 0.4);
+            border-radius: 12px;
+            pointer-events: none;
+        }
 
-header{
-    text-align:center;
-    margin-bottom:30px;
-}
+        /* The standalone song player layered on top */
+        .song-player-front {
+            position: relative;
+            z-index: 10;
+            width: 52%; 
+            height: auto;
+            aspect-ratio: 9 / 16; 
+            /* FIXED: Points to your uploaded vertical jukebox player */
+            background-image: url('1781621075723.png');
+            background-size: cover;
+            background-position: center;
+            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.85)) 
+                    drop-shadow(0 0 15px rgba(0, 242, 254, 0.3));
+            transform: translateY(2%); 
+            transition: transform 0.3s ease;
+        }
 
-header h1{
-    color:#58a6ff;
-    margin-bottom:10px;
-}
+        .song-player-front:hover {
+            transform: translateY(2%) scale(1.02);
+        }
 
-header p{
-    color:#8b949e;
-}
-
-.track-list{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-}
-
-.track{
-    background:#161b22;
-    border:1px solid #30363d;
-    border-radius:12px;
-    padding:15px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.track:hover{
-    border-color:#58a6ff;
-}
-
-.track-left{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.number{
-    font-size:20px;
-    font-weight:bold;
-    color:#58a6ff;
-    width:30px;
-}
-
-.details h3{
-    margin-bottom:5px;
-}
-
-.details p{
-    color:#8b949e;
-}
-
-.duration{
-    color:#58a6ff;
-    font-weight:bold;
-}
-
-footer{
-    text-align:center;
-    margin-top:30px;
-    color:#8b949e;
-}
-</style>
+        @media (min-height: 900px) and (min-width: 1024px) {
+            .dashboard-container {
+                max-width: 550px; 
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
-
-<header>
-    <h1>🎵 AI Music Top 10</h1>
-    <p>Trending AI-generated music tracks</p>
-</header>
-
-<div class="track-list">
-
-<div class="track">
-    <div class="track-left">
-        <div class="number">1</div>
-        <div class="details">
-            <h3>Neon Groove</h3>
-            <p>Neon Heights</p>
-        </div>
+    <div class="dashboard-container">
+        <div class="dashboard-overlay"></div>
+        <div class="song-player-front"></div>
     </div>
-    <div class="duration">3:45</div>
-</div>
-
-<div class="track">
-    <div class="track-left">
-        <div class="number">2</div>
-        <div class="details">
-            <h3>Cyberwave Sunset</h3>
-            <p>Synth Masters</p>
-        </div>
-    </div>
-    <div class="duration">2:37</div>
-</div>
-
-<div class="track">
-    <div class="track-left">
-        <div class="number">3</div>
-        <div class="details">
-            <h3>Synth Cool</h3>
-            <p>Synth Masters</p>
-        </div>
-    </div>
-    <div class="duration">3:38</div>
-</div>
-
-<div class="track">
-    <div class="track-left">
-        <div class="number">4</div>
-        <div class="details">
-            <h3>AI Music</h3>
-            <p>Neon Heights</p>
-        </div>
-    </div>
-    <div class="duration">4:20</div>
-</div>
-
-<div class="track">
-    <div class="track-left">
-        <div class="number">5</div>
-        <div class="details">
-            <h3>Neon Wave</h3>
-            <p>Primary Heights</p>
-        </div>
-    </div>
-    <div class="duration">4:39</div>
-</div>
-
-<div class="track">
-    <div class="track-left">
-        <div class="number">6</div>
-        <div class="details">
-            <h3>Digital Dreams</h3>
-            <p>AI Collective</p>
-        </div>
-    </div>
-    <div class="duration">3:12</div>
-</div>
-
-<div class="track">
-    <div class="track-left">
-        <div class="number">7</div>
-        <div class="details">
-            <h3>Future Echoes</h3>
-            <p>Cyber Beats</p>
-        </div>
-    </div>
-    <div class="duration">3:58</div>
-</div>
-
-<div class="track">
-    <div class="track-left">
-        <div class="number">8</div>
-        <div class="details">
-            <h3>Electric Horizon</h3>
-            <p>Nova Sound</p>
-        </div>
-    </div>
-    <div class="duration">4:10</div>
-</div>
-
-<div class="track">
-    <div class="track-left">
-        <div class="number">9</div>
-        <div class="details">
-            <h3>Quantum Pulse</h3>
-            <p>Future Lab</p>
-        </div>
-    </div>
-    <div class="duration">3:27</div>
-</div>
-
-<div class="track">
-    <div class="track-left">
-        <div class="number">10</div>
-        <div class="details">
-            <h3>AI Symphony</h3>
-            <p>Digital Orchestra</p>
-        </div>
-    </div>
-    <div class="duration">5:02</div>
-</div>
-
-</div>
-
-<footer>
-    © 2026 AI Music Top 10
-</footer>
-
-</div>
 
 </body>
 </html>
