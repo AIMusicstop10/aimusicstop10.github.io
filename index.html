@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Music's Top 10</title>
+    <title>AI Musics Top 10</title>
     <style>
         * {
             box-sizing: border-box;
@@ -27,11 +27,12 @@
             width: 100%;
             max-width: 800px; 
             aspect-ratio: 10 / 16; 
-            /* FIXED: Points to your uploaded background image */
-            background-image: url('1781621044747.png');
+            /* FIXED: Points to your new all-pink background image */
+            background-image: url('Aimusics.png');
             background-size: cover;
             background-position: center;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(186, 73, 255, 0.2);
+            /* CHANGED: Neon pink glow shadows instead of blue */
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 0, 127, 0.4);
             border-radius: 12px;
             display: flex;
             justify-content: center;
@@ -45,7 +46,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(13, 2, 20, 0.4);
+            background: rgba(13, 2, 20, 0.3);
             border-radius: 12px;
             pointer-events: none;
         }
@@ -57,12 +58,13 @@
             width: 52%; 
             height: auto;
             aspect-ratio: 9 / 16; 
-            /* FIXED: Points to your uploaded vertical jukebox player */
+            /* Points to your uploaded vertical jukebox player */
             background-image: url('1781621075723.png');
             background-size: cover;
             background-position: center;
+            /* CHANGED: Match the drop glow shadow to neon pink/magenta */
             filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.85)) 
-                    drop-shadow(0 0 15px rgba(0, 242, 254, 0.3));
+                    drop-shadow(0 0 15px rgba(255, 0, 127, 0.4));
             transform: translateY(2%); 
             transition: transform 0.3s ease;
         }
