@@ -106,16 +106,3 @@
         .catch(error => {
           console.error("Audio playback failed:", error);
         });
-
-      // 5. Revert button layout back to default when track naturally finishes
-      audioPlayer.onended = function() {
-        if (currentButton) {
-          currentButton.classList.remove('playing');
-          currentButton = null;
-        }
-      };
-    }
-  </script>
-
-</body>
-</html>
