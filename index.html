@@ -5,431 +5,230 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIM Music - Top 10 Countdown</title>
     <style>
-        :root {
-            --bg-color: #09090e;
-            --panel-color: #13131f;
-            --accent-cyan: #00f2fe;
-            --accent-blue: #007bff;
-            --fav-pink: #ff007f;
-            --text-main: #ffffff;
-            --text-muted: #888888;
-        }
-
+        /* Base Page Styling */
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0b0c10;
+            color: #c5c6c7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
         }
 
-        /* Brand Headers matching your layout */
-        .brand-header {
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: #1f2833;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+            border: 1px solid #333;
+        }
+
+        /* Header Styling */
+        h1 {
+            color: #fff;
+            text-shadow: 0 0 10px #00f2fe, 0 0 20px #00f2fe;
+            margin-bottom: 5px;
             font-size: 2.5rem;
-            margin: 0 0 5px 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-main);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            text-align: center;
         }
 
         .subtitle {
-            font-size: 1.1rem;
-            color: var(--accent-blue);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 30px;
-            text-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
-        }
-
-        /* Modern Jukebox Plate Container */
-        .player-container {
-            width: 100%;
-            max-width: 420px;
-            background: var(--panel-color);
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 0 30px rgba(0, 242, 254, 0.15);
-            border: 1px solid rgba(0, 242, 254, 0.2);
-            box-sizing: border-box;
-        }
-
-        /* Active Display Panel */
-        .now-playing-title {
             text-align: center;
-            font-size: 1.1rem;
+            color: #66fcf1;
+            margin-top: 0;
+            margin-bottom: 10px;
             font-weight: 600;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--accent-cyan);
-            color: var(--accent-cyan);
-            text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            letter-spacing: 1px;
         }
 
-        /* Hidden or Styled Audio Player Engine */
+        .instructions {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* Audio Player Styling */
+        .audio-player-container {
+            width: 100%;
+            margin-bottom: 25px;
+            background: #151a21;
+            padding: 10px;
+            border-radius: 30px;
+            box-sizing: border-box;
+            border: 1px solid #007bff;
+        }
+
         audio {
             width: 100%;
-            margin-bottom: 20px;
-            outline: none;
         }
 
-        /* Custom Audio Control Row */
-        .controls-row {
+        /* Playlist Stack Styling */
+        .playlist {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding: 0 10px;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .btn {
-            background: none;
-            border: none;
-            color: var(--text-main);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn:hover {
-            color: var(--accent-cyan);
-            text-shadow: 0 0 8px var(--accent-cyan);
-            transform: scale(1.1);
-        }
-
-        .btn-play-pause {
-            font-size: 2.3rem;
-            color: var(--accent-cyan);
-        }
-
-        .btn-fav-toggle.active {
-            color: var(--fav-pink);
-            text-shadow: 0 0 8px var(--fav-pink);
-        }
-
-        /* Countdown Playlist Section */
-        .playlist-section-header {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .track-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            max-height: 280px;
-            overflow-y: auto;
-        }
-
-        /* Custom Track Layout matching your screenshot styles */
+        /* Fixed Track Hotspot Classes */
         .track-hotspot {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            background: #151a21;
+            border: 1px solid #45f3ff33;
             padding: 12px 15px;
-            margin-bottom: 8px;
-            background: rgba(255, 255, 255, 0.02);
             border-radius: 8px;
             cursor: pointer;
-            border-left: 3px solid transparent;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+            color: inherit;
         }
 
         .track-hotspot:hover {
-            background: rgba(0, 123, 255, 0.08);
-            border-left-color: var(--accent-blue);
+            background: #1f2833;
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+            transform: scale(1.01);
         }
 
+        /* Active Track Glow */
         .track-hotspot.active {
-            background: rgba(0, 242, 254, 0.08);
-            border-left-color: var(--accent-cyan);
+            border-color: #00f2fe;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+            background: #1a242f;
         }
 
-        .left-details-block {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+        .track-number { 
+            font-weight: bold; 
+            color: #007bff; 
+            font-size: 1.2rem; 
+            min-width: 35px; 
+        } 
 
-        .track-number {
-            font-weight: bold;
-            color: var(--accent-blue);
-            font-size: 1.2rem;
-            min-width: 25px;
-        }
+        .track-hotspot.active .track-number { 
+            color: #00f2fe; 
+            text-shadow: 0 0 8px #00f2fe;
+        } 
 
-        .track-hotspot.active .track-number {
-            color: var(--accent-cyan);
-            text-shadow: 0 0 5px var(--accent-cyan);
-        }
+        .track-details { 
+            display: flex; 
+            flex-direction: column; 
+            flex-grow: 1;
+        } 
 
-        .track-details {
-            display: flex;
-            flex-direction: column;
-        }
+        .track-name { 
+            font-weight: 600; 
+            color: #fff;
+            font-size: 1.05rem;
+        } 
 
-        .track-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 2px;
-        }
+        .track-artist { 
+            font-size: 0.85rem; 
+            color: #888; 
+            margin-top: 2px; 
+        } 
 
-        .track-artist {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
+        .play-icon { 
+            font-size: 1.2rem; 
+            color: #007bff; 
+            margin-left: 10px;
+        } 
 
-        .right-actions-block {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .track-hotspot.active .play-icon { 
+            color: #00f2fe; 
         }
-
-        .play-icon {
-            font-size: 1.2rem;
-            color: var(--accent-blue);
-        }
-
-        .track-hotspot.active .play-icon {
-            color: var(--accent-cyan);
-        }
-
-        .fav-star {
-            color: rgba(255, 255, 255, 0.1);
-            font-size: 1.2rem;
-            transition: color 0.2s;
-        }
-
-        .fav-star.active {
-            color: var(--fav-pink);
-            text-shadow: 0 0 5px var(--fav-pink);
-        }
-
-        /* Scrollbar aesthetics */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
     </style>
 </head>
 <body>
 
-    <h1 class="brand-header">AIM Music</h1>
+<div class="container">
+    <h1>AIM Music</h1>
     <div class="subtitle">Top 10 Countdown</div>
+    <div class="instructions">Select a track to play</div>
 
-    <div class="player-container">
-        
-        <div class="now-playing-title" id="player-title">Select a Track to Play</div>
-
-        <audio id="main-audio"></audio>
-
-        <div class="controls-row">
-            <button class="btn btn-fav-toggle" id="global-fav-btn" title="Save to Personal Folder">♥</button>
-            <button class="btn" id="prev-btn">⏮</button>
-            <button class="btn btn-play-pause" id="play-btn">▶</button>
-            <button class="btn" id="next-btn">⏭</button>
-        </div>
-
-        <div class="playlist-section-header">
-            <span>Chart Ranking</span>
-            <span>Folder</span>
-        </div>
-        
-        <ul class="track-list" id="jukebox-playlist">
-            </ul>
+    <div class="audio-player-container">
+        <audio id="main-audio" controls>
+            <source id="audio-source" src="" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 
-<script>
-    // 1. TOP 10 INVENTORY - Swap out URLs with your actual track links
-    const topTenTracks = [
-        { position: "01", title: "Neon Energy", artist: "AI Producer One", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
-        { position: "02", title: "Cyber Streets", artist: "AI Producer Two", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
-        { position: "03", title: "Future Rhythm", artist: "Digital Architect", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
-        { position: "04", title: "Velocity Rap", artist: "Vocal Synthesizer", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" },
-        { position: "05", title: "Midnight Drive", artist: "Retro Wave City", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" },
-        { position: "06", title: "Deep Bassline", artist: "Sub-Woof Frequency", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3" },
-        { position: "07", title: "Cloud Nine", artist: "Ambient Dreamer", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3" },
-        { position: "08", title: "Glitch Hop", artist: "The Broken Code", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" },
-        { position: "09", title: "Synth Sonata", artist: "Classical Electric", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" },
-        { position: "10", title: "Final Frontier", artist: "Cosmic Audio", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3" }
-    ];
+    <div class="playlist">
+        <div class="track-hotspot" onclick="playTrack(this, 'tracks/cyber_pulse.mp3')">
+            <div class="track-number">01</div>
+            <div class="track-details">
+                <div class="track-name">Cyber Pulse</div>
+                <div class="track-artist">Neon Horizon</div>
+            </div>
+            <div class="play-icon">▶</div>
+        </div>
 
-    // 2. Personal Folder / Local Storage Core Logic
-    let userSavedFolder = JSON.parse(localStorage.getItem('aim_user_favorites')) || [];
+        <div class="track-hotspot" onclick="playTrack(this, 'tracks/midnight_drive.mp3')">
+            <div class="track-number">02</div>
+            <div class="track-details">
+                <div class="track-name">Midnight Drive</div>
+                <div class="track-artist">Starlight Echo</div>
+            </div>
+            <div class="play-icon">▶</div>
+        </div>
 
-    // System Connections
-    const audio = document.getElementById('main-audio');
-    const playBtn = document.getElementById('play-btn');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const globalFavBtn = document.getElementById('global-fav-btn');
-    const playerTitle = document.getElementById('player-title');
-    const playlistContainer = document.getElementById('jukebox-playlist');
+        <div class="track-hotspot" onclick="playTrack(this, 'tracks/electric_dream.mp3')">
+            <div class="track-number">03</div>
+            <div class="track-details">
+                <div class="track-name">Electric Dream</div>
+                <div class="track-artist">Vapor Wave</div>
+            </div>
+            <div class="play-icon">▶</div>
+        </div>
 
-    let currentTrackIndex = -1;
-    let isPlaying = false;
+        <div class="track-hotspot" onclick="playTrack(this, 'tracks/synth_city.mp3')">
+            <div class="track-number">04</div>
+            <div class="track-details">
+                <div class="track-name">Synth City</div>
+                <div class="track-artist">The Glitch</div>
+            </div>
+            <div class="play-icon">▶</div>
+        </div>
 
-    // Load active track information into engine
-    function loadTrack(index) {
-        if (index < 0 || index >= topTenTracks.length) return;
-        currentTrackIndex = index;
-        const track = topTenTracks[index];
-        
-        audio.src = track.url;
-        playerTitle.textContent = `${track.title} - ${track.artist}`;
-        
-        updateVisualStates();
-    }
+        <div class="track-hotspot" onclick="playTrack(this, 'tracks/retro_future.mp3')">
+            <div class="track-number">05</div>
+            <div class="track-details">
+                <div class="track-name">Retro Future</div>
+                <div class="track-artist">Digital Nomad</div>
+            </div>
+            <div class="play-icon">▶</div>
+        </div>
 
-    // Play and Pause Trigger Mechanism
-    function togglePlayback() {
-        if (currentTrackIndex === -1) {
-            loadTrack(0); // Default load track 1 if nothing is selected
-        }
+        <div class="track-hotspot" onclick="playTrack(this, 'tracks/laser_tag.mp3')">
+            <div class="track-number">06</div>
+            <div class="track-details">
+                <div class="track-name">Laser Tag</div>
+                <div class="track-artist">Pixel Heart</div>
+            </div>
+            <div class="play-icon">▶</div>
+        </div>
 
-        if (isPlaying) {
-            audio.pause();
-            playBtn.textContent = "▶";
-        } else {
-            audio.play().catch(err => console.log("Audio device ignition requires user engagement context."));
-            playBtn.textContent = "⏸";
-        }
-        isPlaying = !isPlaying;
-        updateVisualStates();
-    }
+        <div class="track-hotspot" onclick="playTrack(this, 'tracks/hyperdrive.mp3')">
+            <div class="track-number">07</div>
+            <div class="track-details">
+                <div class="track-name">Hyperdrive</div>
+                <div class="track-artist">Sonic Boom</div>
+            </div>
+            <div class="play-icon">▶</div>
+        </div>
 
-    // Skip Buttons Logic
-    function handleTrackSkip(offset) {
-        let targetIndex = currentTrackIndex + offset;
-        if (targetIndex >= topTenTracks.length) targetIndex = 0;
-        if (targetIndex < 0) targetIndex = topTenTracks.length - 1;
-        
-        loadTrack(targetIndex);
-        if (isPlaying) {
-            audio.play();
-        } else {
-            togglePlayback();
-        }
-    }
+        <div class="track-hotspot" onclick="playTrack(this, 'tracks/static_sky.mp3')">
+            <div class="track-number">08</div>
+            <div class="track-details">
+                <div class="track-name">Static Sky</div>
+                <div class="track-artist">Frequency</div>
+            </div>
+            <div class="play-icon">▶</div>
+        </div>
 
-    // Personal Folder Save System
-    function toggleTrackToFolder(trackTitleString) {
-        if (userSavedFolder.includes(trackTitleString)) {
-            userSavedFolder = userSavedFolder.filter(title => title !== trackTitleString);
-        } else {
-            userSavedFolder.push(trackTitleString);
-        }
-        localStorage.setItem('aim_user_favorites', JSON.stringify(userSavedFolder));
-        updateVisualStates();
-    }
-
-    // Render the layout rows to browser screen
-    function renderJukeboxInterface() {
-        playlistContainer.innerHTML = "";
-        
-        topTenTracks.forEach((track, index) => {
-            const isFavorite = userSavedFolder.includes(track.title);
-            const li = document.createElement('li');
-            li.className = `track-hotspot ${index === currentTrackIndex ? 'active' : ''}`;
-            li.setAttribute('data-index', index);
-            
-            li.innerHTML = `
-                <div class="left-details-block">
-                    <span class="track-number">${track.position}</span>
-                    <div class="track-details">
-                        <span class="track-name">${track.title}</span>
-                        <span class="track-artist">${track.artist}</span>
-                    </div>
-                </div>
-                <div class="right-actions-block">
-                    <span class="play-icon">▶</span>
-                    <span class="fav-star ${isFavorite ? 'active' : ''}">♥</span>
-                </div>
-            `;
-
-            // Click row to play track handler
-            li.addEventListener('click', (e) => {
-                // If user clicks the favorite icon star specifically
-                if (e.target.classList.contains('fav-star')) {
-                    e.stopPropagation();
-                    toggleTrackToFolder(track.title);
-                    return;
-                }
-                
-                loadTrack(index);
-                isPlaying = false; 
-                togglePlayback();
-            });
-
-            playlistContainer.appendChild(li);
-        });
-    }
-
-    // Dynamically adjust neon visual highlights on click updates
-    function updateVisualStates() {
-        // Update Playlist Row styling loops
-        const rows = playlistContainer.querySelectorAll('.track-hotspot');
-        rows.forEach((row, index) => {
-            const track = topTenTracks[index];
-            const isFavorite = userSavedFolder.includes(track.title);
-            const star = row.querySelector('.fav-star');
-
-            if (index === currentTrackIndex) {
-                row.classList.add('active');
-                row.querySelector('.play-icon').textContent = isPlaying ? "⏸" : "▶";
-            } else {
-                row.classList.remove('active');
-                row.querySelector('.play-icon').textContent = "▶";
-            }
-
-            if (isFavorite) {
-                star.classList.add('active');
-            } else {
-                star.classList.remove('active');
-            }
-        });
-
-        // Update Global Main Action Bar buttons styling
-        if (currentTrackIndex !== -1) {
-            const activeTrack = topTenTracks[currentTrackIndex];
-            if (userSavedFolder.includes(activeTrack.title)) {
-                globalFavBtn.classList.add('active');
-            } else {
-                globalFavBtn.classList.remove('active');
-            }
-        }
-    }
-
-    // Set up Main Hardware Interface Listeners
-    playBtn.addEventListener('click', togglePlayback);
-    prevBtn.addEventListener('click', () => handleTrackSkip(-1));
-    nextBtn.addEventListener('click', () => handleTrackSkip(1));
-    
-    globalFavBtn.addEventListener('click', () => {
-        if (currentTrackIndex !== -1) {
-            toggleTrackToFolder(topTenTracks[currentTrackIndex].title);
-        }
-    });
-
-    // Automatically change to next song if active song finishes playing completely
-    audio.addEventListener('ended', () => handleTrackSkip(1));
-
-    // Initialize layout setup rules on startup window configuration
-    renderJukeboxInterface();
-</script>
-
-</body>
-</html>
+        <div class="track-hotspot" onclick="playTrack(this, 'tracks/neon_rain.mp3')">
+            <div class="track-number">0
