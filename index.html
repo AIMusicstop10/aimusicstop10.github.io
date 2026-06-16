@@ -1,309 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIMusic's Top 10</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 20px 0;
-            background-color: #030008;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AIMusic's Top 10 Jukebox</title>
 
-        /* Cyber Jukebox Console Main Body */
-        .cyber-jukebox {
-            width: 95%;
-            max-width: 500px;
-            background: #0d0614;
-            border: 4px solid #4a154b;
-            border-radius: 24px;
-            padding: 25px;
-            box-shadow: 0 0 35px rgba(147, 51, 234, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.9);
-            position: relative;
-            box-sizing: border-box;
-        }
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
 
-        /* Neon Side Columns */
-        .cyber-jukebox::before, .cyber-jukebox::after {
-            content: '';
-            position: absolute;
-            top: 40px;
-            width: 12px;
-            height: calc(100% - 80px);
-            border-radius: 6px;
-        }
-        /* Left Column Blue */
-        .cyber-jukebox::before {
-            left: -8px;
-            background: #00d4ff;
-            box-shadow: 0 0 15px #00d4ff;
-        }
-        /* Right Column Purple */
-        .cyber-jukebox::after {
-            right: -8px;
-            background: #bd00ff;
-            box-shadow: 0 0 15px #bd00ff;
-        }
+body{
+background:#090909;
+color:white;
+min-height:100vh;
+}
 
-        /* Main Glowing Title Header */
-        .header-panel {
-            text-align: center;
-            margin-bottom: 25px;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 15px;
-            border-radius: 12px;
-            border: 2px solid #bd00ff;
-            box-shadow: 0 0 15px rgba(189, 0, 255, 0.4);
-        }
+header{
+text-align:center;
+padding:25px;
+background:#111;
+border-bottom:2px solid #00d4ff;
+}
 
-        .header-panel h1 {
-            margin: 0;
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #ffffff;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-        }
+header h1{
+color:#00d4ff;
+font-size:2.2rem;
+}
 
-        .header-panel span {
-            color: #00d4ff;
-            text-shadow: 0 0 10px #00d4ff;
-        }
+.player{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
 
-        /* Vinyl Record Centerpiece Area */
-        .record-zone {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 25px;
-        }
+.now-playing{
+background:#161616;
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+text-align:center;
+}
 
-        .vinyl-record {
-            width: 140px;
-            height: 140px;
-            background: radial-gradient(circle, #000 30%, #111 31%, #222 40%, #050505 50%, #1a1a1a 70%, #000 100%);
-            border-radius: 50%;
-            border: 2px solid #333;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 0 10px rgba(189, 0, 255, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+#songTitle{
+font-size:1.4rem;
+color:#00d4ff;
+margin-bottom:10px;
+}
 
-        /* Center Gold Label */
-        .record-label {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, #ffd700, #b8860b);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #000;
-            font-size: 9px;
-            font-weight: bold;
-            text-align: center;
-            box-shadow: 0 0 5px rgba(0,0,0,0.5);
-        }
+audio{
+width:100%;
+}
 
-        /* Sleek Status Display Screen */
-        .status-display {
-            background: #040206;
-            border: 2px solid #00d4ff;
-            border-radius: 12px;
-            padding: 12px;
-            text-align: center;
-            box-shadow: inset 0 0 15px rgba(0, 212, 255, 0.3), 0 0 10px rgba(0, 212, 255, 0.1);
-            margin-bottom: 25px;
-        }
+.controls{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:10px;
+margin-top:15px;
+}
 
-        .status-label {
-            font-size: 11px;
-            color: #00d4ff;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
+button{
+background:#00d4ff;
+color:black;
+border:none;
+padding:12px 18px;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+}
 
-        .status-text {
-            font-size: 18px;
-            font-weight: bold;
-            color: #ffffff;
-            letter-spacing: 1px;
-            text-shadow: 0 0 5px #ffffff;
-        }
+button:hover{
+opacity:.8;
+}
 
-        /* Neon Track Selector Container */
-        .tracks-container {
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px solid #4a154b;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.6);
-        }
+.search{
+margin:20px 0;
+}
 
-        .grid-title {
-            text-align: center;
-            font-size: 13px;
-            color: #aaa;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
+.search input{
+width:100%;
+padding:12px;
+border-radius:8px;
+border:none;
+font-size:1rem;
+}
 
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
+.playlist{
+background:#161616;
+border-radius:15px;
+overflow:hidden;
+}
 
-        /* High-tech Glowing Purple Grid Buttons */
-        .cyber-btn {
-            background: #140b24;
-            border: 2px solid #bd00ff;
-            color: #bd00ff;
-            font-size: 16px;
-            font-weight: bold;
-            padding: 12px 0;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 0 8px rgba(189, 0, 255, 0.3);
-            transition: all 0.15s ease;
-        }
+.song{
+padding:15px;
+border-bottom:1px solid #222;
+cursor:pointer;
+}
 
-        .cyber-btn:hover {
-            background: rgba(189, 0, 255, 0.1);
-            box-shadow: 0 0 12px rgba(189, 0, 255, 0.6);
-        }
+.song:hover{
+background:#222;
+}
 
-        .cyber-btn:active, .cyber-btn.active {
-            background: #bd00ff;
-            color: #000000;
-            box-shadow: 0 0 15px #bd00ff;
-            transform: scale(0.95);
-        }
-
-        /* Action Panel Buttons (Clear & Play) */
-        .action-panel {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .action-btn {
-            font-size: 16px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            padding: 14px 0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-
-        .btn-clear {
-            background: transparent;
-            border: 2px solid #ff0055;
-            color: #ff0055;
-            box-shadow: 0 0 8px rgba(255, 0, 85, 0.2);
-        }
-
-        .btn-clear:active {
-            background: #ff0055;
-            color: #000;
-            box-shadow: 0 0 15px #ff0055;
-        }
-
-        .btn-activate {
-            background: transparent;
-            border: 2px solid #00d4ff;
-            color: #00d4ff;
-            box-shadow: 0 0 8px rgba(0, 212, 255, 0.2);
-        }
-
-        .btn-activate:active {
-            background: #00d4ff;
-            color: #000;
-            box-shadow: 0 0 15px #00d4ff;
-        }
-    </style>
+.active{
+background:#00d4ff;
+color:black;
+font-weight:bold;
+}
+</style>
 </head>
+
 <body>
 
-    <div class="cyber-jukebox">
-        <div class="header-panel">
-            <h1>AIMusic's <span>Top 10</span></h1>
-        </div>
-        
-        <div class="record-zone">
-            <div class="vinyl-record">
-                <div class="record-label">TOP 10</div>
-            </div>
-        </div>
+<header>
+<h1>🎵 AIMusic's Top 10 Jukebox</h1>
+<p>Original AI Music Collection</p>
+</header>
 
-        <div class="status-display">
-            <div class="status-label">System Status</div>
-            <div id="display-text" class="status-text">READY TO LOAD TRAX</div>
-        </div>
+<div class="player">
 
-        <div class="tracks-container">
-            <div class="grid-title">Select Track Number</div>
-            <div class="button-grid">
-                <button class="cyber-btn" onclick="selectTrack('1', this)">1</button>
-                <button class="cyber-btn" onclick="selectTrack('2', this)">2</button>
-                <button class="cyber-btn" onclick="selectTrack('3', this)">3</button>
-                <button class="cyber-btn" onclick="selectTrack('4', this)">4</button>
-                <button class="cyber-btn" onclick="selectTrack('5', this)">5</button>
-                <button class="cyber-btn" onclick="selectTrack('6', this)">6</button>
-                <button class="cyber-btn" onclick="selectTrack('7', this)">7</button>
-                <button class="cyber-btn" onclick="selectTrack('8', this)">8</button>
-                <button class="cyber-btn" onclick="selectTrack('9', this)">9</button>
-                <button class="cyber-btn" onclick="selectTrack('10', this)">10</button>
-            </div>
+<div class="now-playing">
+<div id="songTitle">Select A Song</div>
 
-            <div class="action-panel">
-                <button class="action-btn btn-clear" onclick="clearSystem()">Clear</button>
-                <button class="action-btn btn-activate" onclick="fireTrack()">Play</button>
-            </div>
-        </div>
-    </div>
+<audio id="audioPlayer" controls></audio>
 
-    <script>
-        let selectedTrackNum = "";
+<div class="controls">
+<button onclick="previousSong()">⏮ Previous</button>
+<button onclick="shuffleSongs()">🔀 Shuffle</button>
+<button onclick="toggleRepeat()">🔁 Repeat</button>
+<button onclick="nextSong()">⏭ Next</button>
+</div>
 
-        function selectTrack(num, buttonElement) {
-            let buttons = document.querySelectorAll('.cyber-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
-            buttonElement.classList.add('active');
-            selectedTrackNum = num;
-            document.getElementById('display-text').innerText = "TRACK " + num + " ARMED";
-        }
+<br>
 
-        function clearSystem() {
-            selectedTrackNum = "";
-            let buttons = document.querySelectorAll('.cyber-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            document.getElementById('display-text').innerText = "READY TO LOAD TRAX";
-        }
+<label>Volume</label>
+<input type="range" min="0" max="1" step="0.01"
+value="1"
+oninput="audio.volume=this.value">
 
-        function fireTrack() {
-            if(selectedTrackNum === "") {
-                document.getElementById('display-text').innerText = "SELECT TRACK FIRST";
-            } else {
-                document.getElementById('display-text').innerText = "NOW STREAMING: TRACK " + selectedTrackNum;
-            }
-        }
-    </script>
+</div>
+
+<div class="search">
+<input type="text"
+id="search"
+placeholder="Search songs..."
+onkeyup="filterSongs()">
+</div>
+
+<div class="playlist" id="playlist"></div>
+
+</div>
+
+<script>
+
+const songs = [
+
+"2026a.mp3",
+"4love.mp3",
+"Private Chef .mp3",
+"Rights Go Quiet.mp3",
+"Sassy Sophie.mp3",
+"Suzanne.mp3",
+"man matterv.mp3",
+"prison burden1.mp3",
+"LOOK AROUND (PSA).mp3",
+"I don't hate you (Remix).mp3"
+
+];
+
+const audio =
+document.getElementById("audioPlayer");
+
+const playlist =
+document.getElementById("playlist");
+
+const title =
+document.getElementById("songTitle");
+
+let currentSong = 0;
+let repeat = false;
+
+function buildPlaylist(){
+
+playlist.innerHTML="";
+
+songs.forEach((song,index)=>{
+
+const div =
+document.createElement("div");
+
+div.className="song";
+
+div.innerHTML=song;
+
+div.onclick=()=>playSong(index);
+
+playlist.appendChild(div);
+
+});
+
+}
+
+function playSong(index){
+
+currentSong=index;
+
+audio.src=songs[index];
+
+audio.play();
+
+title.innerHTML=songs[index];
+
+updateActive();
+
+}
+
+function updateActive(){
+
+document.querySelectorAll(".song")
+.forEach((item,i)=>{
+
+item.classList.toggle(
+"active",
+i===currentSong
+);
+
+});
+
+}
+
+function nextSong(){
+
+currentSong++;
+
+if(currentSong>=songs.length)
+currentSong=0;
+
+playSong(currentSong);
+
+}
+
+function previousSong(){
+
+currentSong--;
+
+if(currentSong<0)
+currentSong=songs.length-1;
+
+playSong(currentSong);
+
+}
+
+function shuffleSongs(){
+
+songs.sort(()=>Math.random()-0.5);
+
+buildPlaylist();
+
+}
+
+function toggleRepeat(){
+
+repeat=!repeat;
+
+alert(
+repeat
+? "Repeat On"
+: "Repeat Off"
+);
+
+}
+
+audio.addEventListener(
+"ended",
+()=>{
+if(repeat){
+playSong(currentSong);
+}
+else{
+nextSong();
+}
+}
+);
+
+function filterSongs(){
+
+const search =
+document
+.getElementById("search")
+.value
+.toLowerCase();
+
+document
+.querySelectorAll(".song")
+.forEach(song=>{
+
+song.style.display=
+song.innerText
+.toLowerCase()
+.includes(search)
+? "block"
+: "none";
+
+});
+
+}
+
+buildPlaylist();
+
+</script>
 
 </body>
-</html> 
+</html>
