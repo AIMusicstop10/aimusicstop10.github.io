@@ -1,1 +1,198 @@
+track-number {
+            font-weight: bold;
+            color: #007bff;
+            font-size: 1.2rem;
+            min-width: 25px;
+        }
+
+        .track-hotspot.active .track-number {
+            color: #00f2fe;
+        }
+
+        .track-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .track-name {
+            font-weight: 600;
+        }
+
+        .track-artist {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        .play-icon {
+            font-size: 1.2rem;
+            color: #007bff;
+        }
+
+        .track-hotspot.active .play-icon {
+            color: #00f2fe;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="brand-header">AIM Music</h1>
+    <div class="subtitle">Top 10 Countdown</div>
+
+    <div class="player-container">
+        <div class="now-playing-title" id="player-title">Select a track to play</div>
+        <audio id="main-audio" controls>
+            <source id="audio-source" src="" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <div class="track-container">
+        <button class="track-hotspot" onclick="playTrack(this, 'Cyber Pulse', 'Neon Horizon', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')">
+            <div class="track-info">
+                <span class="track-number">01</span>
+                <div class="track-details">
+                    <span class="track-name">Cyber Pulse</span>
+                    <span class="track-artist">Neon Horizon</span>
+                </div>
+            </div>
+            <span class="play-icon">▶</span>
+        </button>
+
+        <button class="track-hotspot" onclick="playTrack(this, 'Midnight Drive', 'Starlight Echo', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3')">
+            <div class="track-info">
+                <span class="track-number">02</span>
+                <div class="track-details">
+                    <span class="track-name">Midnight Drive</span>
+                    <span class="track-artist">Starlight Echo</span>
+                </div>
+            </div>
+            <span class="play-icon">▶</span>
+        </button>
+
+        <button class="track-hotspot" onclick="playTrack(this, 'Electric Dream', 'Vapor Wave', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+            <div class="track-info">
+                <span class="track-number">03</span>
+                <div class="track-details">
+                    <span class="track-name">Electric Dream</span>
+                    <span class="track-artist">Vapor Wave</span>
+                </div>
+            </div>
+            <span class="play-icon">▶</span>
+        </button>
+
+        <button class="track-hotspot" onclick="playTrack(this, 'Synth City', 'The Glitch', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3')">
+            <div class="track-info">
+                <span class="track-number">04</span>
+                <div class="track-details">
+                    <span class="track-name">Synth City</span>
+                    <span class="track-artist">The Glitch</span>
+                </div>
+            </div>
+            <span class="play-icon">▶</span>
+        </button>
+
+        <button class="track-hotspot" onclick="playTrack(this, 'Retro Future', 'Digital Nomad', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3')">
+            <div class="track-info">
+                <span class="track-number">05</span>
+                <div class="track-details">
+                    <span class="track-name">Retro Future</span>
+                    <span class="track-artist">Digital Nomad</span>
+                </div>
+            </div>
+            <span class="play-icon">▶</span>
+        </button>
+
+        <button class="track-hotspot" onclick="playTrack(this, 'Laser Tag', 'Pixel Heart', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3')">
+            <div class="track-info">
+                <span class="track-number">06</span>
+                <div class="track-details">
+                    <span class="track-name">Laser Tag</span>
+                    <span class="track-artist">Pixel Heart</span>
+                </div>
+            </div>
+            <span class="play-icon">▶</span>
+        </button>
+
+        <button class="track-hotspot" onclick="playTrack(this, 'Hyperdrive', 'Sonic Boom', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3')">
+            <div class="track-info">
+                <span class="track-number">07</span>
+                <div class="track-details">
+                    <span class="track-name">Hyperdrive</span>
+                    <span class="track-artist">Sonic Boom</span>
+                </div>
+            </div>
+            <span class="play-icon">▶</span>
+        </button>
+
+        <button class="track-hotspot" onclick="playTrack(this, 'Static Sky', 'Frequency', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3')">
+            <div class="track-info">
+                <span class="track-number">08</span>
+                <div class="track-details">
+                    <span class="track-name">Static Sky</span>
+                    <span class="track-artist">Frequency</span>
+                </div>
+            </div>
+            <span class="play-icon">▶</span>
+        </button>
+
+        <button class="track-hotspot" onclick="playTrack(this, 'Neon Rain', 'Chroma', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3')">
+            <div class="track-info">
+                <span class="track-number">09</span>
+                <div class="track-details">
+                    <span class="track-name">Neon Rain</span>
+                    <span class="track-artist">Chroma</span>
+                </div>
+            </div>
+            <span class="play-icon">▶</span>
+        </button>
+
+        <button class="track-hotspot" onclick="playTrack(this, 'After Hours', 'The Sunset Club', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3')">
+            <div class="track-info">
+                <span class="track-number">10</span>
+                <div class="track-details">
+                    <span class="track-name">After Hours</span>
+                    <span class="track-artist">The Sunset Club</span>
+                </div>
+            </div>
+            <span class="play-icon">▶</span>
+        </button>
+    </div>
+
+    <script>
+        function playTrack(buttonElement, trackName, artistName, audioUrl) {
+            const audioPlayer = document.getElementById('main-audio');
+            const audioSource = document.getElementById('audio-source');
+            const playerTitle = document.getElementById('player-title');
+            
+            // Reset visual states for all buttons
+            document.querySelectorAll('.track-hotspot').forEach(btn => {
+                btn.classList.remove('active');
+                btn.querySelector('.play-icon').innerText = '▶';
+            });
+
+            // Update source and titles instantly
+            audioSource.src = audioUrl;
+            audioPlayer.load();
+            playerTitle.innerText = `NOW PLAYING: ${trackName} - ${artistName}`;
+
+            // Execute clean playback promise check
+            const playPromise = audioPlayer.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Visual confirmation fires when playback succeeds
+                    buttonElement.classList.add('active');
+                    buttonElement.querySelector('.play-icon').innerText = '🔊';
+                }).catch(() => {
+                    // Fallback handled safely if blocked by browser autoplay rules
+                    playerTitle.innerText = `Click play to hear: ${trackName}`;
+                    buttonElement.classList.add('active');
+                });
+            }
+        }
+    </script>
+
+</body> 
+</html>
 
