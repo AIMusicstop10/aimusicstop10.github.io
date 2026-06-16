@@ -1,317 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>AIMusic's Top 10 Jukebox</title>
-
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#090909;
-color:white;
-min-height:100vh;
-}
-
-header{
-text-align:center;
-padding:25px;
-background:#111;
-border-bottom:2px solid #00d4ff;
-}
-
-header h1{
-color:#00d4ff;
-font-size:2.2rem;
-}
-
-.player{
-max-width:900px;
-margin:auto;
-padding:20px;
-}
-
-.now-playing{
-background:#161616;
-padding:20px;
-border-radius:15px;
-margin-bottom:20px;
-text-align:center;
-}
-
-#songTitle{
-font-size:1.4rem;
-color:#00d4ff;
-margin-bottom:10px;
-}
-
-audio{
-width:100%;
-}
-
-.controls{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:10px;
-margin-top:15px;
-}
-
-button{
-background:#00d4ff;
-color:black;
-border:none;
-padding:12px 18px;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-}
-
-button:hover{
-opacity:.8;
-}
-
-.search{
-margin:20px 0;
-}
-
-.search input{
-width:100%;
-padding:12px;
-border-radius:8px;
-border:none;
-font-size:1rem;
-}
-
-.playlist{
-background:#161616;
-border-radius:15px;
-overflow:hidden;
-}
-
-.song{
-padding:15px;
-border-bottom:1px solid #222;
-cursor:pointer;
-}
-
-.song:hover{
-background:#222;
-}
-
-.active{
-background:#00d4ff;
-color:black;
-font-weight:bold;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Jukebox UI</title>
 </head>
-
 <body>
 
-<header>
-<h1>🎵 AIMusic's Top 10 Jukebox</h1>
-<p>Original AI Music Collection</p>
-</header>
-
-<div class="player">
-
-<div class="now-playing">
-<div id="songTitle">Select A Song</div>
-
-<audio id="audioPlayer" controls></audio>
-
-<div class="controls">
-<button onclick="previousSong()">⏮ Previous</button>
-<button onclick="shuffleSongs()">🔀 Shuffle</button>
-<button onclick="toggleRepeat()">🔁 Repeat</button>
-<button onclick="nextSong()">⏭ Next</button>
-</div>
-
-<br>
-
-<label>Volume</label>
-<input type="range" min="0" max="1" step="0.01"
-value="1"
-oninput="audio.volume=this.value">
-
-</div>
-
-<div class="search">
-<input type="text"
-id="search"
-placeholder="Search songs..."
-onkeyup="filterSongs()">
-</div>
-
-<div class="playlist" id="playlist"></div>
-
-</div>
-
-<script>
-
-const songs = [
-
-"2026a.mp3",
-"4love.mp3",
-"Private Chef .mp3",
-"Rights Go Quiet.mp3",
-"Sassy Sophie.mp3",
-"Suzanne.mp3",
-"man matterv.mp3",
-"prison burden1.mp3",
-"LOOK AROUND (PSA).mp3",
-"I don't hate you (Remix).mp3"
-
-];
-
-const audio =
-document.getElementById("audioPlayer");
-
-const playlist =
-document.getElementById("playlist");
-
-const title =
-document.getElementById("songTitle");
-
-let currentSong = 0;
-let repeat = false;
-
-function buildPlaylist(){
-
-playlist.innerHTML="";
-
-songs.forEach((song,index)=>{
-
-const div =
-document.createElement("div");
-
-div.className="song";
-
-div.innerHTML=song;
-
-div.onclick=()=>playSong(index);
-
-playlist.appendChild(div);
-
-});
-
-}
-
-function playSong(index){
-
-currentSong=index;
-
-audio.src=songs[index];
-
-audio.play();
-
-title.innerHTML=songs[index];
-
-updateActive();
-
-}
-
-function updateActive(){
-
-document.querySelectorAll(".song")
-.forEach((item,i)=>{
-
-item.classList.toggle(
-"active",
-i===currentSong
-);
-
-});
-
-}
-
-function nextSong(){
-
-currentSong++;
-
-if(currentSong>=songs.length)
-currentSong=0;
-
-playSong(currentSong);
-
-}
-
-function previousSong(){
-
-currentSong--;
-
-if(currentSong<0)
-currentSong=songs.length-1;
-
-playSong(currentSong);
-
-}
-
-function shuffleSongs(){
-
-songs.sort(()=>Math.random()-0.5);
-
-buildPlaylist();
-
-}
-
-function toggleRepeat(){
-
-repeat=!repeat;
-
-alert(
-repeat
-? "Repeat On"
-: "Repeat Off"
-);
-
-}
-
-audio.addEventListener(
-"ended",
-()=>{
-if(repeat){
-playSong(currentSong);
-}
-else{
-nextSong();
-}
-}
-);
-
-function filterSongs(){
-
-const search =
-document
-.getElementById("search")
-.value
-.toLowerCase();
-
-document
-.querySelectorAll(".song")
-.forEach(song=>{
-
-song.style.display=
-song.innerText
-.toLowerCase()
-.includes(search)
-? "block"
-: "none";
-
-});
-
-}
-
-buildPlaylist();
-
-</script>
+    <div class="jukebox-container">
+        <div class="neon-tube tube-left"></div>
+        <div class="neon-tube tube-right"></div>
+        <div class="neon-tube tube-top"></div>
+
+        <div class="jukebox-body">
+            <div class="screen">
+                <header class="logo-container">
+                    <h1 class="logo-text">AIMUSICSTOP10<span class="logo-ext">.com</span></h1>
+                </header>
+
+                <main class="playlist-container">
+                    <h2 class="playlist-title">TOP 10</h2>
+                    <ul class="track-list">
+                        <li class="track-item active">
+                            <span class="track-number">1.</span>
+                            <div class="track-details">
+                                <span class="track-name">Midnight Groove</span>
+                                <span class="track-artist">Neon Heights</span>
+                            </div>
+                            <span class="track-duration">3:45</span>
+                            <div class="track-thumb thumb-1"></div>
+                        </li>
+                        <li class="track-item">
+                            <span class="track-number">2.</span>
+                            <div class="track-details">
+                                <span class="track-name">Cyberwave Sunset</span>
+                                <span class="track-artist">Synth Masters</span>
+                            </div>
+                            <span class="track-duration">2:37</span>
+                            <div class="track-thumb thumb-2"></div>
+                        </li>
+                        <li class="track-item">
+                            <span class="track-number">3.</span>
+                            <div class="track-details">
+                                <span class="track-name">Synth Cool</span>
+                                <span class="track-artist">Synth Masters</span>
+                            </div>
+                            <span class="track-duration">3:38</span>
+                            <div class="track-thumb thumb-3"></div>
+                        </li>
+                        <li class="track-item">
+                            <span class="track-number">4.</span>
+                            <div class="track-details">
+                                <span class="track-name">AImusic</span>
+                                <span class="track-artist">Neon Heights</span>
+                            </div>
+                            <span class="track-duration">4:20</span>
+                            <div class="track-thumb thumb-4"></div>
+                        </li>
+                        <li class="track-item">
+                            <span class="track-number">5.</span>
+                            <div class="track-details">
+                                <span class="track-name">Neonwave</span>
+                                <span class="track-artist">Primary Heights</span>
+                            </div>
+                            <span class="track-duration">4:39</span>
+                            <div class="track-thumb thumb-5"></div>
+                        </li>
+                        <li class="track-item">
+                            <span class="track-number">6.</span>
+                            <div class="track-details">
+                                <span class="track-name">The Earloop</span>
+                                <span class="track-artist">One Mainlets</span>
+                            </div>
+                            <span class="track-duration">4:33</span>
+                            <div class="track-thumb thumb-6"></div>
+                        </li>
+                        <li class="track-item">
+                            <span class="track-number">7.</span>
+                            <div class="track-details">
+                                <span class="track-name">Civil of Fine</span>
+                                <span class="track-artist">Synth Mare</span>
+                            </div>
+                            <span class="track-duration">4:39</span>
+                            <div class="track-thumb thumb-7"></div>
+                        </li>
+                        <li class="track-item">
+                            <span class="track-number">8.</span>
+                            <div class="track-details">
+                                <span class="track-name">Salah Love</span>
+                                <span class="track-artist">Bolk Coats</span>
+                            </div>
+                            <span class="track-duration">3:39</span>
+                            <div class="track-thumb thumb-8"></div>
+                        </li>
+                        <li class="track-item">
+                            <span class="track-number">9.</span>
+                            <div class="track-details">
+                                <span class="track-name">Cyberwave Sunset</span>
+                                <span class="track-artist">Synth Masters</span>
+                            </div>
+                            <span class="track-duration">4:37</span>
+                            <div class="track-thumb thumb-2"></div>
+                        </li>
+                        <li class="track-item">
+                            <span class="track-number">10.</span>
+                            <div class="track-details">
+                                <span class="track-name">Broadtooth</span>
+                                <span class="track-artist">Neon Heights</span>
+                            </div>
+                            <span class="track-duration">7:28</span>
+                            <div class="track-thumb thumb-10"></div>
+                        </li>
+                    </ul>
+                </main>
+            </div>
+
+            <div class="control-panel">
+                <div class="playback-buttons">
+                    <button class="btn-media" aria-label="Previous">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                    </button>
+                    <button class="btn-media" aria-label="Play/Pause">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    </button>
+                    <button class="btn-media" aria-label="Next">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                    </button>
+                </div>
+                
+                <div class="volume-container">
+                    <div class="volume-icon">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5z"/></svg>
+                    </div>
+                    <div class="volume-knob">
+                        <div class="knob-indicator"></div>
+                    </div>
+                    <span class="volume-label">VOLUME</span>
+                </div>
+            </div>
+
+            <div class="keypad">
+                <button class="key">1</button>
+                <button class="key">2</button>
+                <button class="key">3</button>
+                <button class="key">4</button>
+                <button class="key">5</button>
+                <button class="key">6</button>
+                <button class="key">7</button>
+                <button class="key">8</button>
+            </div>
+
+            <div class="footer-panel">
+                <button class="btn-start">PRESS TO START</button>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
