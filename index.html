@@ -82,16 +82,21 @@ Now take all that and some how make a song letter<!DOCTYPE html>
         }
 
         /* Track List Container */
-        .track-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto 50px auto;
-            box-sizing: border-box;
-        }
+track-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 50px auto;
+    box-sizing: border-box;
+    
+    /* ADDED LINES */
+    max-height: 400px; 
+    overflow-y: auto;
+    padding-right: 10px;
+}
 
         /* Neon Jukebox Buttons */
         .track-hotspot {
